@@ -254,7 +254,6 @@ body{
     0 0 16px rgba(230,240,255,0.5);
   color:#ffffff;
 }
-
 /* główny play – większy, bardziej 3D */
 .ctrl.play{
   width:40px;height:40px;
@@ -271,7 +270,6 @@ body{
     0 4px 12px rgba(0,0,0,0.9),
     0 0 10px rgba(190,205,235,0.6);
 }
-
 /* responsiveness */
 @media(max-width:900px){
   .profile-card{ grid-template-columns: 200px 1fr; gap:20px; padding:26px; width:92vw; }
@@ -311,7 +309,6 @@ body{
 </style>
 </head>
 <body>
-
 <!-- Quantum background -->
 <canvas id="quantum"></canvas>
 
@@ -368,16 +365,12 @@ const playlist = [
     artist: "Unknown Artist"
   },
   {
-    url: "https://files.catbox.moe/TU_WKLEJ_DRUGI_LINK.mp3", // <--- TUTAJ DRUGI MP3
+    url: "https://files.catbox.moe/9piikz.mp3", // <--- TUTAJ DRUGI MP3
     title: "Track 2",
     artist: "Unknown Artist"
   }
 ];
-// Możesz dodać więcej utworów tak:
-// { url: "https://files.catbox.moe/TU_TRZECI_LINK.mp3", title: "Track 3", artist: "Unknown" },
-
 let currentTrack = 0;
-
 /* ===== Quantum Background (bez zmian) ===== */
 const cnv = document.getElementById('quantum');
 const ctxQ = cnv.getContext('2d');
@@ -459,7 +452,6 @@ function loopQuantum(){
   requestAnimationFrame(loopQuantum);
 }
 loopQuantum();
-
 /* ===== Neon ring around avatar ===== */
 const ringCanvas = document.getElementById('neon-ring');
 const ringCtx = ringCanvas.getContext('2d');
@@ -549,10 +541,8 @@ function loadTrack(i, autoplay = false){
     btnPlay.textContent = '▶';
   }
 }
-
 /* start – ustaw pierwszy utwór, ale nie odtwarzaj */
 loadTrack(0,false);
-
 /* Play / Pause */
 btnPlay.addEventListener('click', () => {
   if (!audio.src && playlist.length > 0){
