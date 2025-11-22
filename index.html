@@ -10,6 +10,7 @@
   --ki-blue: #aee8ff;
   --bg-dark: #050711;
   --text: #eaf4ff;
+  --silver-neon: #e8f0ff;
 }
 
 /* reset */
@@ -48,12 +49,12 @@ body{
   grid-template-columns: 280px 1fr;
   gap:34px;
   align-items:start;
-  background:transparent; /* line-only card as requested */
+  background:transparent;
   border:1px solid rgba(174,232,255,0.18);
   box-shadow:0 0 40px rgba(6,12,22,0.6), 0 6px 30px rgba(10,18,30,0.5);
 }
 
-/* subtle inner highlight line (keeps card visible but almost transparent) */
+/* subtle inner highlight line */
 .profile-card::after{
   content:"";
   position:absolute;
@@ -82,7 +83,7 @@ body{
   justify-content:center;
 }
 
-/* neon ring canvas sits behind avatar image but above card */
+/* neon ring canvas */
 #neon-ring{
   position:absolute;
   width:220px;
@@ -94,7 +95,7 @@ body{
   pointer-events:none;
 }
 
-/* inner static thin ring (white/blue) */
+/* inner avatar ring */
 .avatar-wrapper{
   position:relative;
   width:160px;
@@ -116,7 +117,7 @@ body{
   display:block;
 }
 
-/* nickname directly under avatar (centered) */
+/* nickname under avatar */
 .avatar-nick {
   margin-top: 6px;
   font-size: 28px;
@@ -125,7 +126,6 @@ body{
   letter-spacing: 0.8px;
   text-align: center;
 
-  /* Efekt metalicznego srebra */
   background: linear-gradient(
     90deg,
     #bfcdd9 0%,
@@ -138,16 +138,14 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* Animacje: przesuwający się gradient + pulsacja światła */
   animation: flowSilver 5s linear infinite, pulseLight 7s ease-in-out infinite;
 
-  /* Poświata */
   text-shadow:
     0 6px 20px rgba(0,0,0,0.45),
     0 0 14px rgba(174,232,255,0.18);
 }
 
-/* right column: info + player */
+/* right column */
 .right-col{
   padding-top:6px;
 }
@@ -161,49 +159,67 @@ body{
   margin-bottom:22px;
 }
 
-/* Music player — jasny, szklany efekt */
+/* ===================== */
+/*   EPICKI SILVER NEON PLAYER */
+/* ===================== */
+
 .player {
-  width: 360px;
-  max-width: 100%;
-  border-radius: 14px;
-  padding: 14px;
-  background: rgba(6, 10, 20, 0.25);
-  border: 1px solid rgba(174, 232, 255, 0.2);
-  box-shadow: 0 0 12px rgba(174, 232, 255, 0.06),
-    inset 0 0 8px rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.06), rgba(6,10,20,0.9));
+  border: 1px solid rgba(232,240,255,0.25);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.75),
+    0 0 26px rgba(232,240,255,0.28);
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
-/* track meta */
+
+/* tytuł + artysta */
 .track-title{
   font-weight:700;
-  color:#eaf4ff;
+  color:#f9fbff;
   font-size:0.98rem;
+  letter-spacing:0.02em;
 }
 .track-artist{
   font-size:0.82rem;
-  color:rgba(170,205,220,0.85);
+  color:rgba(200,210,230,0.9);
   margin-top:2px;
 }
 
-/* progress bar */
+/* 3D progress bar */
 .progress-wrap{
   position:relative;
-  height:6px;
-  background:rgba(255,255,255,0.03);
-  border-radius:6px;
+  height:7px;
+  background:linear-gradient(180deg, rgba(15,20,30,0.9), rgba(5,8,16,1));
+  border-radius:999px;
   overflow:hidden;
   margin-top:6px;
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.9),
+    0 0 12px rgba(232,240,255,0.25);
 }
 .progress{
   position:absolute;
   left:0;top:0;height:100%;
   width:0%;
-  background:linear-gradient(90deg, rgba(174,232,255,0.95), rgba(110,190,255,0.9));
-  box-shadow:0 0 10px rgba(174,232,255,0.35);
+  background:linear-gradient(90deg,#ffffff,#e8f2ff,#cfdaf0);
+  box-shadow:
+    0 0 10px rgba(255,255,255,0.85),
+    0 0 18px rgba(190,210,255,0.85);
+  border-radius:999px;
+  animation: barPulse 2.8s ease-in-out infinite;
+}
+
+/* bass pulse efekt */
+@keyframes barPulse{
+  0%,100% { filter:brightness(1); transform:scaleY(1); }
+  50% { filter:brightness(1.25); transform:scaleY(1.14); }
 }
 
 /* controls */
@@ -211,25 +227,49 @@ body{
   display:flex;
   gap:12px;
   align-items:center;
-  justify-content:flex-start;
-  margin-top:6px;
+  justify-content:center;
+  margin-top:8px;
 }
 .ctrl{
-  width:36px;height:36px;border-radius:8px;display:grid;place-items:center;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.02);
-  color:var(--ki-blue);
+  width:32px;height:32px;border-radius:999px;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 0%, rgba(255,255,255,0.16), rgba(5,8,16,0.95));
+  border:1px solid rgba(230,240,255,0.18);
+  color:var(--silver-neon);
   cursor:pointer;
-  transition:transform .15s ease, color .15s ease;
+  font-size:0.82rem;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.75),
+    0 0 10px rgba(210,225,255,0.32);
+  transition:
+    transform .14s ease,
+    box-shadow .14s ease,
+    color .14s ease,
+    background .14s ease;
 }
-.ctrl:hover{ transform:translateY(-3px); color:#eaffff }
+.ctrl:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.9),
+    0 0 16px rgba(230,240,255,0.5);
+  color:#ffffff;
+}
 
-/* main play bigger */
+/* główny play – większy, bardziej 3D */
 .ctrl.play{
-  width:46px;height:46px;border-radius:10px;
-  background:linear-gradient(180deg,#bfeeff,#67c6ff);
-  color:#051018;
-  box-shadow:0 6px 18px rgba(103,198,255,0.18), 0 0 18px rgba(174,232,255,0.14);
+  width:40px;height:40px;
+  background:radial-gradient(circle at 30% 0%, #ffffff, #d6e3ff);
+  color:#05070b;
+  font-size:1rem;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.9),
+    0 0 18px rgba(232,240,255,0.8);
+}
+.ctrl.play:active{
+  transform:translateY(1px) scale(0.97);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.9),
+    0 0 10px rgba(190,205,235,0.6);
 }
 
 /* responsiveness */
@@ -281,7 +321,7 @@ body{
     <div class="avatar-orbit">
       <canvas id="neon-ring" aria-hidden="true"></canvas>
       <div class="avatar-wrapper">
-        <img src="https://xatimg.com/image/WEAuqjVeZVz0.gif" alt="Avatar">
+        <img src="https://xatimg.com/image/7DKiHbhcCvvv.png" alt="Avatar">
       </div>
     </div>
     <div class="avatar-nick">DEMON</div>
@@ -294,11 +334,11 @@ body{
       Jestem zagadką, którą trudno rozwikłać.
     </div>
 
-    <!-- player (inside card under bio) -->
+    <!-- EPICKI SILVER NEON PLAYER -->
     <div class="player" id="playerBox">
       <div>
-        <div class="track-title" id="trackTitle">TKM ft. Dawid Narożny - STAN</div>
-<div class="track-artist" id="trackArtist">TKM</div>
+        <div class="track-title" id="trackTitle">Track 1</div>
+        <div class="track-artist" id="trackArtist">Unknown Artist</div>
       </div>
 
       <div class="progress-wrap" id="progressWrap" aria-hidden="true">
@@ -316,11 +356,29 @@ body{
   </div>
 </main>
 
-<!-- audio element (place muzyka.mp3 next to this file) -->
-<audio id="ki-audio" src="https://files.catbox.moe/m8hnvc.mp3" preload="metadata"></audio>
+<!-- audio element: src ustawiamy z JS z playlisty -->
+<audio id="ki-audio" preload="metadata"></audio>
 
 <script>
-/* ===== Quantum Background (same as before, slightly tuned) ===== */
+/* ===== PLAYLISTA – TUTAJ WKLEJASZ LINKI MP3 ===== */
+const playlist = [
+  {
+    url: "https://files.catbox.moe/2bchs7.mp3",
+    title: "Track 1",
+    artist: "Unknown Artist"
+  },
+  {
+    url: "https://files.catbox.moe/TU_WKLEJ_DRUGI_LINK.mp3", // <--- TUTAJ DRUGI MP3
+    title: "Track 2",
+    artist: "Unknown Artist"
+  }
+];
+// Możesz dodać więcej utworów tak:
+// { url: "https://files.catbox.moe/TU_TRZECI_LINK.mp3", title: "Track 3", artist: "Unknown" },
+
+let currentTrack = 0;
+
+/* ===== Quantum Background (bez zmian) ===== */
 const cnv = document.getElementById('quantum');
 const ctxQ = cnv.getContext('2d');
 let W, H, flows = [], dots = [];
@@ -402,7 +460,7 @@ function loopQuantum(){
 }
 loopQuantum();
 
-/* ===== Neon ring around avatar - full rotating ring ===== */
+/* ===== Neon ring around avatar ===== */
 const ringCanvas = document.getElementById('neon-ring');
 const ringCtx = ringCanvas.getContext('2d');
 const SIZE = 220;
@@ -424,7 +482,6 @@ function drawRing(){
   ringCtx.translate(SIZE/2,SIZE/2);
   ringCtx.rotate(angle);
 
-  // gradient (full circle, no cut)
   const g = ringCtx.createLinearGradient(-RADIUS,0,RADIUS,0);
   g.addColorStop(0, "rgba(174,232,255,0.35)");
   g.addColorStop(0.25, "rgba(174,232,255,0.75)");
@@ -437,13 +494,11 @@ function drawRing(){
   ringCtx.shadowBlur = 16;
   ringCtx.shadowColor = "rgba(174,232,255,0.9)";
 
-  // full arc 0..2pi (plus tiny epsilon to avoid anti-alias seam)
   ringCtx.beginPath();
   ringCtx.arc(0,0,RADIUS,0,Math.PI*2 + 0.0001);
   ringCtx.closePath();
   ringCtx.stroke();
 
-  /* optional second thin inner ring (static, subtle) */
   ringCtx.lineWidth = 1.6;
   ringCtx.globalAlpha = 0.55;
   ringCtx.strokeStyle = "rgba(174,232,255,0.55)";
@@ -457,11 +512,9 @@ function drawRing(){
 }
 setupRingCanvas();
 drawRing();
-
-/* keep ring canvas sized on DPR changes */
 window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`).addEventListener('change', setupRingCanvas);
 
-/* ===== Simple player logic (inside card) ===== */
+/* ===== PLAYER LOGIC z playlistą ===== */
 const audio = document.getElementById('ki-audio');
 const btnPlay = document.getElementById('btnPlay');
 const btnPrev = document.getElementById('btnPrev');
@@ -470,63 +523,102 @@ const btnRepeat = document.getElementById('btnRepeat');
 const btnShuffle = document.getElementById('btnShuffle');
 const progressBar = document.getElementById('progressBar');
 const progressWrap = document.getElementById('progressWrap');
+const titleEl = document.getElementById('trackTitle');
+const artistEl = document.getElementById('trackArtist');
 
 let repeat = false;
 let shuffle = false;
 
+/* ładowanie utworu z playlisty */
+function loadTrack(i, autoplay = false){
+  if(playlist.length === 0) return;
+  currentTrack = (i + playlist.length) % playlist.length; // zabezpieczenie
+
+  const track = playlist[currentTrack];
+  audio.src = track.url;
+  titleEl.textContent = track.title;
+  artistEl.textContent = track.artist || "Unknown Artist";
+
+  progressBar.style.width = '0%';
+
+  if(autoplay){
+    audio.play().catch(()=>{});
+    btnPlay.textContent = '⏸';
+  } else {
+    audio.pause();
+    btnPlay.textContent = '▶';
+  }
+}
+
+/* start – ustaw pierwszy utwór, ale nie odtwarzaj */
+loadTrack(0,false);
+
+/* Play / Pause */
 btnPlay.addEventListener('click', () => {
+  if (!audio.src && playlist.length > 0){
+    loadTrack(currentTrack, true);
+    return;
+  }
+
   if (audio.paused) {
-    audio.play().catch(()=>{}); // may be blocked until user gesture
+    audio.play().catch(()=>{});
     btnPlay.textContent = '⏸';
   } else {
     audio.pause();
     btnPlay.textContent = '▶';
   }
 });
+/* Next / Prev */
+function nextTrack(){
+  if(playlist.length === 0) return;
+  if(shuffle){
+    let next = currentTrack;
+    while(next === currentTrack && playlist.length > 1){
+      next = Math.floor(Math.random() * playlist.length);
+    }
+    loadTrack(next, true);
+  } else {
+    loadTrack(currentTrack + 1, true);
+  }
+}
+function prevTrack(){
+  if(playlist.length === 0) return;
+  loadTrack(currentTrack - 1, true);
+}
 
-btnPrev.addEventListener('click', ()=> {
-  audio.currentTime = Math.max(0, audio.currentTime - 10);
-});
-btnNext.addEventListener('click', ()=> {
-  audio.currentTime = Math.min(audio.duration || 0, (audio.currentTime || 0) + 10);
-});
+btnNext.addEventListener('click', nextTrack);
+btnPrev.addEventListener('click', prevTrack);
+/* Repeat toggle */
 btnRepeat.addEventListener('click', ()=> {
   repeat = !repeat;
-  audio.loop = repeat;
-  btnRepeat.style.opacity = repeat?1:0.6;
+  btnRepeat.style.opacity = repeat ? 1 : 0.6;
 });
+/* Shuffle toggle */
 btnShuffle.addEventListener('click', ()=> {
   shuffle = !shuffle;
-  btnShuffle.style.opacity = shuffle?1:0.6;
+  btnShuffle.style.opacity = shuffle ? 1 : 0.6;
 });
-
-/* update progress */
-audio.addEventListener('timeupdate', ()=>{
-  if (!audio.duration) return;
+/* Auto-next po końcu */
+audio.addEventListener('ended', ()=> {
+  if(repeat){
+    audio.currentTime = 0;
+    audio.play().catch(()=>{});
+  } else {
+    nextTrack();
+  }
+});
+/* Progress update */
+audio.addEventListener('timeupdate', ()=> {
+  if(!audio.duration) return;
   const pct = (audio.currentTime / audio.duration) * 100;
   progressBar.style.width = pct + '%';
 });
-
-/* click on progress to seek */
+/* Seek po kliknięciu w pasek */
 progressWrap.addEventListener('click', (e)=>{
+  if(!audio.duration) return;
   const rect = progressWrap.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const pct = x / rect.width;
-  if (audio.duration) audio.currentTime = pct * audio.duration;
-});
-
-/* small safety: if source missing, disable play button */
-audio.addEventListener('error', ()=> {
-  btnPlay.disabled = true;
-  btnPlay.style.opacity = 0.5;
-});
-
-/* optional: click anywhere to start audio if autoplay blocked (user gesture) */
-document.addEventListener('click', function onceStart(){
-  if (audio.paused && audio.getAttribute('src')) {
-    audio.play().catch(()=>{});
-  }
-  document.removeEventListener('click', onceStart);
+  const pct = (e.clientX - rect.left) / rect.width;
+  audio.currentTime = pct * audio.duration;
 });
 </script>
 </body>
